@@ -119,3 +119,9 @@ Add `tsconfig.json`:
 }
 
 ```
+
+- Install Rollup
+
+```
+pnpm i -D -w rollup
+```
