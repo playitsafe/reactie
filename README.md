@@ -42,3 +42,12 @@ Add this to `package.json`:
 }
 
 ```
+
+- Add Husky
+
+```
+pnpm add husky@8  -D -w
+npx husky install
+
+npx husky add .husky/pre-commit "pmpm lint"
+```
