@@ -2,6 +2,8 @@ export type Type = any
 export type Key = any
 export type Ref = any
 export type Props = any
+/** div, h1, h2, a, p ... */
+export type ElementType = any
 
 export interface ReactElement {
 	$$typeof: symbol | number
