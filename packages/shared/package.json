@@ -1,0 +1,10 @@
+{
+	"name": "shared",
+	"version": "1.0.0",
+	"description": "All shared util functions and type definitions",
+	"main": "index.js",
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@10.12.1"
+}
