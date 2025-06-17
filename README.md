@@ -2,7 +2,7 @@
 
 - Init pnpm
 
-```
+```sh
 nvm use
 pnpm init
 ```
@@ -11,7 +11,7 @@ pnpm init
 
 - Add ESLinit
 
-```
+```sh
 pnpm i eslint -D -w
 
 # init eslint config
@@ -23,14 +23,14 @@ pnpm i -D -w @typescript-eslint/eslint-plugin
 
 - Add Prettier
 
-```
+```sh
 pnpm i prettier -D -w
 ```
 
 - Add prettier config `.prettier.json`
   Also, to avoid it conflicts with eslint, need to integrate prettier into eslint:
 
-```
+```sh
 pnpm i eslint-config-prettier eslint-plugin-prettier -D -w
 ```
 
@@ -45,7 +45,7 @@ Add this to `package.json`:
 
 - Add Husky
 
-```
+```sh
 pnpm add husky@8  -D -w
 npx husky install
 
@@ -54,7 +54,7 @@ npx husky add .husky/pre-commit "pmpm lint"
 
 - Add commitlint
 
-```
+```sh
 pnpm i -D -w commitlint  @commitlint/cli @commitlint/config-conventional
 ```
 
@@ -62,13 +62,13 @@ Create `.commitlintrc.js`:
 
 ```js
 module.exports = {
-	extends: ["@commitlint/config-conventional"]
+	extends: ['@commitlint/config-conventional'],
 }
 ```
 
 Integrate commitlint into husky with conventional commit rules:
 
-```
+```sh
 npx husky add .husky/commit-msg "npx --no-install commitlint -e $HUSKY_GIT_PARAMS"
 ```
 
@@ -89,13 +89,13 @@ Common types are:
 
 - Add TS config
 
-```
+```sh
 pnpm i typescript -D -w
 ```
 
 Add `tsconfig.json`:
 
-```
+```json
 {
 	"compileOnSave": true,
 	"compilerOptions": {
@@ -117,12 +117,11 @@ Add `tsconfig.json`:
 		"baseUrl": "./packages"
 	}
 }
-
 ```
 
 - Install Rollup
 
-```
+```sh
 pnpm i -D -w rollup
 ```
 
@@ -138,7 +137,7 @@ The structure of react project is as follows:
 
 - create `packages/react`:
 
-```
+```sh
 cd packages/react
 
 pnpm init
@@ -157,7 +156,7 @@ In `packages/react/package.json`, add:
 ## Implement `React.createElement` method
 
 What is JSX concompilation?
-JSX is a syntax extension for JavaScript that allows you to write HTML-like code within JavaScript. It is commonly used in React to describe the UI structure. JSX needs to be transformed into JavaScript function calls, which React can understand and render. It includes:
+JSX is a syntax extension for JavaScript that allows you to write HTML-like code within JavaScript. It is commonly used in React to describe the UI structure. JSX needs to be transformed into JavaScript function calls, which React can understand sand render. It includes:
 
 - Compile time: Parsing the JSX syntax(handled by babel already✅)
 
@@ -188,3 +187,31 @@ import { jsx as _jsx } from "react/jsx-runtime";
   - Implement jsx function
   - Implement bundling
   - Implement an environment to test the bundling result
+
+## Implement bundling
+
+Since we've created three functions:
+
+- jsxDEV
+- jsx
+- React.createElement
+
+We need to bundle and output three files:
+
+- `react/jsx-dev-runtime.js` (dev)/packages
+- `react/jsx-runtime.js` (prd)
+- React
+
+Create `scripts/rollup/react.config.js`(config for React package).
+
+Add dependencies:
+
+```sh
+pnpm i -D -w rollup-plugin-typescript2 @rollup/plugin-commonjs
+
+// remove old dist before build
+pnpm i -D -w rimraf
+
+// Need a lin to generate package.json in build dist
+pnpm i -D -w  rollup-plugin-generate-package-json
+```
