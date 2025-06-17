@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { REACT_ELEMENT_TYPE } from 'shared/ReactSymbols'
-import type {
+import {
 	Type,
 	Key,
 	Ref,
 	Props,
-	ReactElement,
-	ElementType
+	ReactElementType,
+	ElementType,
 } from 'shared/ReactTypes'
 /**
  * The return type of `jsx` or `React.createElement` is a type of `ReactElement`
@@ -17,8 +17,8 @@ const ReactElement = function (
 	type: Type,
 	key: Key,
 	ref: Ref,
-	props: Props
-): ReactElement {
+	props: Props,
+): ReactElementType {
 	const element = {
 		// Internal property to identify it's a 'React' element
 		$$typeof: REACT_ELEMENT_TYPE,
@@ -27,7 +27,7 @@ const ReactElement = function (
 		ref,
 		props,
 		// Custom identifier for this project
-		__mark: 'aaron'
+		__mark: 'aaron',
 	}
 	return element
 }

@@ -5,7 +5,7 @@ export type Props = any
 /** div, h1, h2, a, p ... */
 export type ElementType = any
 
-export interface ReactElement {
+export interface ReactElementType {
 	$$typeof: symbol | number
 	type: Type
 	key: Key

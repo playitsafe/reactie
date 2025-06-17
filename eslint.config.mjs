@@ -16,26 +16,31 @@ export default defineConfig([
 			globals: {
 				...globals.browser,
 				...globals.node,
-				...globals.jest
+				...globals.jest,
 			},
-			parser: tseslint.parser
+			parser: tseslint.parser,
 		},
 		plugins: {
 			js,
 			'@typescript-eslint': tseslint.plugin,
-			prettier: prettierPlugin
+			prettier: prettierPlugin,
 		},
 		rules: {
 			...js.configs.recommended.rules,
 			...tseslint.configs.recommended.rules,
-			'prettier/prettier': 'error',
+			'prettier/prettier': [
+				'error',
+				{
+					trailingComma: 'all',
+				},
+			],
 			'no-case-declarations': 'off',
 			'no-constant-condition': 'off',
 			'@typescript-eslint/ban-ts-comment': 'off',
 			'@typescript-eslint/no-unused-vars': 'off',
 			'@typescript-eslint/no-var-requires': 'off',
-			'no-unused-vars': 'off'
-		}
+			'no-unused-vars': 'off',
+		},
 	},
 
 	// Prettier recommended config
@@ -46,6 +51,6 @@ export default defineConfig([
 		files: ['**/*.json'],
 		plugins: { json },
 		language: 'json',
-		extends: ['json/recommended']
-	}
+		extends: ['json/recommended'],
+	},
 ])
