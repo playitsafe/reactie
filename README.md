@@ -155,8 +155,8 @@ In `packages/react/package.json`, add:
 
 ## Implement `React.createElement` method
 
-What is JSX concompilation?
-JSX is a syntax extension for JavaScript that allows you to write HTML-like code within JavaScript. It is commonly used in React to describe the UI structure. JSX needs to be transformed into JavaScript function calls, which React can understand sand render. It includes:
+What is JSX compilation?
+JSX is a syntax extension for JavaScript that allows you to write HTML-like code within JavaScript. It is commonly used in React to describe the UI structure. JSX needs to be transformed into JavaScript function calls, which React can understand and render. It includes:
 
 - Compile time: Parsing the JSX syntax(handled by babel already✅)
 
