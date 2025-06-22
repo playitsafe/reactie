@@ -75,4 +75,45 @@ export const jsx = (type: ElementType, config: any, ...maybeChildren: any) => {
 	return ReactElement(type, key, ref, props)
 }
 
-export const jsxDEV = jsx
+export const jsxDEV = (type: ElementType, config: any) => {
+	// deal with `key` and `ref` properties respectively
+	let key: Key = null
+	let ref: Ref = null
+
+	const props: Props = {}
+
+	// Iterate over the config object, assign every property to `props`
+	for (const prop in config) {
+		const val = config[prop]
+		if (prop === 'key') {
+			if (val !== undefined) {
+				key = '' + val // Convert to string
+			}
+			continue
+		}
+		if (prop === 'ref') {
+			if (val !== undefined) {
+				ref = val // Keep the ref as is
+			}
+			continue
+		}
+		// For other properties, need to check if it's a prop on the prototype
+		if ({}.hasOwnProperty.call(config, prop)) {
+			props[prop] = val // Assign to props
+		}
+	}
+
+	// // maybeChildren
+	// const childrenLength = maybeChildren.length
+	// if (childrenLength) {
+	// 	// child, or [child, child, ...]
+	// 	if (childrenLength === 1) {
+	// 		// If there's only one child, assign it directly
+	// 		props.children = maybeChildren[0]
+	// 	} else {
+	// 		props.children = maybeChildren
+	// 	}
+	// }
+
+	return ReactElement(type, key, ref, props)
+}

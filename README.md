@@ -215,3 +215,47 @@ pnpm i -D -w rimraf
 // Need a lin to generate package.json in build dist
 pnpm i -D -w  rollup-plugin-generate-package-json
 ```
+
+## To test the bundling result
+
+```mermaid
+graph TD
+  reactie
+  ==bundle==>  dist["dist/node_modules/react"]
+  == pnpm link --global points it to ==> react[global react pkg in
+  node_modules]
+  <== pnpm link react --global ==> demo-react["demo react via cra"]
+
+```
+
+### pnpm link
+
+Point the global react package to the bundled react package:
+
+```sh
+# Go to the dist folder of the bundled react package
+cd dist/node_modules
+
+pnpm link --global
+
+
+/Users/aaron/Library/pnpm/global/5:
++ react 1.0.0 <- ../../../../Documents/dev/me/reactie/dist/node_modules/react
+
+```
+
+Create a demo react app to test the bundling result:
+
+```sh
+pnpm create vite react-demo --template react
+cd react demo
+
+```
+
+# Now you can use the bundled react package in the demo app
+
+```sh
+pnpm link react --global
+
+pnpm dev
+```
